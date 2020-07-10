@@ -1,34 +1,14 @@
-# ESP32 Remote Control with WebSocket
+# ESP8266 Remote Control with WebSocket
 
-[Please visit the tutorial][tutorial]
+This is a fork of m1cr0lab's excellent [tutorial] on ESP32 and Webockets, don't miss it!
+It also explains mandatory steps that are not obvious and not covered here (e.g. uploading HTML resources to ESP flash memory).
 
-Throughout the tutorial, you will be able to update your code using the different tagged versions of this repository. Each tag corresponds to the finalized code of a chapter:
+The fork adapts the project for ESP8266 NodeMCU boards. These boards have an additional LED and button and don't require a breadboard or other hardware to run the example.
+It is intended for people who have a ESP8266 NodeMCU board and just want to play with the software part of the project.
 
-```
-$ git tag --list -n1
-v0.0    Project Bootstrap
-v0.1    LED Setup
-v0.2    Button Setup
-v0.3    Web UI Design
-v0.4    SPIFFS Setup
-v0.5    WiFi Setup
-v0.6    Web Server Setup
-v0.7    WebSocket Setup
-v0.8    WebSocket Data Exchange
-v1.0    WebSocket and JSON
-```
 
-For example, to switch to the version of the chapter that deals with setting up the WiFi connection, simply run:
+Please ignore the `'SPIFFS' is deprecated`message. The example should still work. PlatformIO does not directly support LittleFS at the time of this writing.
 
-```
-$ git checkout v0.5
-```
-
-The complete project code corresponds to version 1.0:
-
-```
-$ git checkout v1.0
-```
 
 
 [tutorial]: https://m1cr0lab-esp32.github.io/remote-control-with-websocket/

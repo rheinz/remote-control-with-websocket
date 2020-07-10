@@ -7,8 +7,7 @@
  */
 
 #include <Arduino.h>
-#include <SPIFFS.h>
-#include <WiFi.h>
+#include <FS.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
 
@@ -16,8 +15,8 @@
 // Definition of macros
 // ----------------------------------------------------------------------------
 
-#define LED_PIN   26
-#define BTN_PIN   22
+#define LED_PIN   D0
+#define BTN_PIN   D3
 #define HTTP_PORT 80
 
 // ----------------------------------------------------------------------------
@@ -26,6 +25,10 @@
 
 // Button debouncing
 const uint8_t DEBOUNCE_DELAY = 10; // in milliseconds
+
+
+//Host name
+const char *WIFI_HOSTNAME = "espws";
 
 // WiFi credentials
 const char *WIFI_SSID = "YOUR_WIFI_SSID";
@@ -42,7 +45,7 @@ struct Led {
 
     // methods
     void update() {
-        digitalWrite(pin, on ? HIGH : LOW);
+        digitalWrite(pin, on ? LOW : HIGH);
     }
 };
 
@@ -123,6 +126,7 @@ void initSPIFFS() {
 // ----------------------------------------------------------------------------
 
 void initWiFi() {
+  WiFi.hostname(WIFI_HOSTNAME);  
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
   Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
@@ -222,7 +226,7 @@ void initWebSocket() {
 void setup() {
     pinMode(onboard_led.pin, OUTPUT);
     pinMode(led.pin,         OUTPUT);
-    pinMode(button.pin,      INPUT);
+    pinMode(button.pin,      INPUT_PULLUP);
 
     Serial.begin(115200); delay(500);
 
